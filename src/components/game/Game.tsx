@@ -1,14 +1,16 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ActionType } from '../../actions/gameActions';
 import { fetchData } from '../../api/api';
 import { GameContext } from '../../contexts/GameContext';
 import Grid from '../grid/Grid';
 import Keyboard from '../keyboard/Keyboard';
 import GameFinishedModal from '../modal/GameFinishedModal';
+import HintModal from '../modal/HintModal';
 import InfoModal from '../modal/InfoModal';
 import {
   ActionRow,
   GameWrapper,
+  HintIcon,
   IconsWrapper,
   InfoIcon,
   RepeatIcon,
@@ -18,10 +20,15 @@ let resource = fetchData();
 
 const Game = () => {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [isHintModalOpen, setIsHintModalOpen] = useState(false);
   const [isGameFinishedModalOpen, setIsGameFinishedModalOpen] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
-  const { state, dispatch } = useContext(GameContext);
-  const word = resource.word.read();
+
+  const {
+    state: { activeRow, word, guesses, numberOfHints },
+    dispatch,
+  } = useContext(GameContext);
+  const newWord = resource.word.read();
 
   useEffect(() => {
     if (isResetting) {
@@ -32,9 +39,9 @@ const Game = () => {
     }
   }, [isResetting, dispatch]);
 
-  const onGameChange = useCallback(() => {
-    if (state.word !== '') {
-      const isWon = state.guesses.some((guess) => guess === state.word);
+  useEffect(() => {
+    if (word !== '') {
+      const isWon = guesses.some((guess) => guess === word);
       if (isWon) {
         dispatch({
           type: ActionType.SetGameIsWon,
@@ -43,31 +50,31 @@ const Game = () => {
         setIsGameFinishedModalOpen(true);
       }
 
-      if (state.activeRow === 5) {
+      if (activeRow === 5) {
         dispatch({
           type: ActionType.SetGameIsWon,
-          payload: state.guesses[state.activeRow] === state.word,
+          payload: guesses[activeRow] === word,
         });
         setIsGameFinishedModalOpen(true);
       }
     }
-  }, [state.activeRow]);
+  }, [activeRow]);
 
   useEffect(() => {
-    onGameChange();
-  }, [onGameChange]);
-
-  useEffect(() => {
-    if (word.length) {
-      dispatch({ type: ActionType.SetWord, payload: word[0] });
+    if (newWord.length) {
+      dispatch({ type: ActionType.SetWord, payload: newWord[0] });
     }
-  }, [word, dispatch]);
+  }, [newWord, dispatch]);
 
   return (
     <>
       <InfoModal
         isOpen={isInfoModalOpen}
         handleClose={() => setIsInfoModalOpen(false)}
+      />
+      <HintModal
+        isOpen={isHintModalOpen}
+        handleClose={() => setIsHintModalOpen(false)}
       />
       <GameFinishedModal
         isOpen={isGameFinishedModalOpen}
@@ -78,6 +85,9 @@ const Game = () => {
         <ActionRow>
           <h1>Game</h1>
           <IconsWrapper>
+            {numberOfHints > 0 && (
+              <HintIcon onClick={() => setIsHintModalOpen(true)} />
+            )}
             <RepeatIcon onClick={() => setIsResetting(true)} />
             <InfoIcon onClick={() => setIsInfoModalOpen(true)} />
           </IconsWrapper>

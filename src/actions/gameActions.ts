@@ -6,7 +6,8 @@ export enum ActionType {
   MoveForward,
   MoveBackward,
   MoveToNextRow,
-  ResetGame
+  ResetGame,
+  SetNumberOfHints
 }
 
 export interface SetWord {
@@ -42,7 +43,11 @@ export interface ResetGame {
 
 export interface SaveRow {
   type: ActionType.SaveRow;
-  payload:string;
+  payload: string;
 }
 
-export type GameActions = SaveRow | SetGameIsWon | SetWord | UpdateLetter | MoveForward | ResetGame|  MoveBackward | MoveToNextRow;
+export interface SetNumberOfHints {
+  type: ActionType.SetNumberOfHints;
+}
+
+export type GameActions = SaveRow | SetGameIsWon | SetWord | UpdateLetter | SetNumberOfHints | MoveForward | ResetGame|  MoveBackward | MoveToNextRow;

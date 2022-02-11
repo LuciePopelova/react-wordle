@@ -14,7 +14,6 @@ type Props = {
 
 const Modal: React.FC<Props> = ({ isOpen, handleClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-
   const animation = useSpring({
     config: {
       duration: 250,

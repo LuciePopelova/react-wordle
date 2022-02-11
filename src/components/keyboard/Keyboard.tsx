@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ActionType } from '../../actions/gameActions';
 import { keys } from '../../constants/keyConstants';
 import { TileStatusType } from '../../constants/tileConstants';
@@ -7,40 +7,35 @@ import { getKeyStatuses } from '../../helpers/gameHelper';
 import { Button, KeyboardWrapper } from './KeyboardStyles';
 
 const Keyboard = () => {
-  const { state, dispatch } = useContext(GameContext);
+  const {
+    state: { activePosition, activeRow, isGameWon, guesses, word },
+    dispatch,
+  } = useContext(GameContext);
   const [keyStatuses, setKeyStatuses] = useState<{
     [key: string]: TileStatusType;
   }>({});
 
-  const onActiveRowChange = useCallback(() => {
-    setKeyStatuses(getKeyStatuses(state.guesses, state.word));
-  }, [state.activeRow]);
-
   useEffect(() => {
-    onActiveRowChange();
-  }, [onActiveRowChange]);
+    setKeyStatuses(getKeyStatuses(guesses, word));
+  }, [activeRow]);
 
   const handleSetWordClick = (event: any) => {
     const value = event.target.value;
 
-    if (state.activeRow <= 5 && !state.isGameWon) {
-      let updatedRow = state.guesses[state.activeRow].split('');
+    if (activeRow <= 5 && !isGameWon) {
+      let updatedRow = guesses[activeRow].split('');
 
-      if (value === '<<' && state.activePosition > 0) {
+      if (value === '<<' && activePosition > 0) {
         updatedRow.pop();
         dispatch({ type: ActionType.MoveBackward });
         dispatch({
           type: ActionType.UpdateLetter,
           payload: updatedRow.join(''),
         });
-      } else if (value === 'ENTER' && state.activePosition === 5) {
+      } else if (value === 'ENTER' && activePosition === 5) {
         dispatch({ type: ActionType.MoveToNextRow });
-      } else if (
-        state.activePosition < 5 &&
-        value !== '<<' &&
-        value !== 'ENTER'
-      ) {
-        updatedRow[state.activePosition] = value;
+      } else if (activePosition < 5 && value !== '<<' && value !== 'ENTER') {
+        updatedRow[activePosition] = value;
         dispatch({ type: ActionType.MoveForward });
         dispatch({
           type: ActionType.UpdateLetter,

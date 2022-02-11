@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MdInfoOutline, MdReplay } from 'react-icons/md';
+import { MdInfoOutline, MdReplay, MdHelp } from 'react-icons/md';
 
 export const GameWrapper = styled.div`
   padding-top: 8vh;
@@ -39,6 +39,13 @@ height: 1.5rem;
 `
 
 export const RepeatIcon = styled(MdReplay)`
+margin-left: 0.5rem;
+cursor: pointer;
+width: 1.5rem;
+height: 1.5rem;
+`
+
+export const HintIcon = styled(MdHelp)`
 cursor: pointer;
 width: 1.5rem;
 height: 1.5rem;

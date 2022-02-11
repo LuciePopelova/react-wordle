@@ -16,18 +16,20 @@ const GameFinishedModal: React.FC<Props> = ({
   isResetting,
   handleClose,
 }) => {
-  const { state } = useContext(GameContext);
-  const additionalText = state.isGameWon
+  const {
+    state: { isGameWon, word },
+  } = useContext(GameContext);
+  const additionalText = isGameWon
     ? 'Do you want to win one more time?'
     : 'But don´t worry... You can try it again!';
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose}>
       <h1>Game finished</h1>
-      <h2>{state.isGameWon ? 'You won!' : 'You lost!'}</h2>
+      <h2>{isGameWon ? 'You won!' : 'You lost!'}</h2>
       <p>The word you were looking for was:</p>
       <TilesWrapper>
-        {state.word.split('').map((letter, index) => (
+        {word.split('').map((letter, index) => (
           <Tile
             key={index}
             value={letter}

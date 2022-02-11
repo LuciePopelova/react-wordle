@@ -3,11 +3,13 @@ import { GameContext } from '../../contexts/GameContext';
 import Row from '../row/Row';
 
 const Grid = () => {
-  const { state } = useContext(GameContext);
+  const {
+    state: { guesses },
+  } = useContext(GameContext);
 
   return (
     <div>
-      {state.guesses.map((guess, index) => (
+      {guesses.map((guess, index) => (
         <Row key={index} id={index} guess={guess} />
       ))}
     </div>

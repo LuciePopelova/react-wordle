@@ -7,6 +7,7 @@ type State = {
   activeRow: number;
   activePosition: number;
   isGameWon: boolean;
+  numberOfHints: number;
 };
 
 type GameProviderProps = { children: React.ReactNode };
@@ -22,6 +23,7 @@ const initialState: State = {
   activeRow: 0,
   activePosition: 0,
   isGameWon: false,
+  numberOfHints: 3,
 };
 
 const GameContext = createContext<ContextProps>({
@@ -75,6 +77,12 @@ const gameReducer: Reducer<State, GameActions> = (state, action) => {
       return {
         ...state,
         isGameWon: action.payload,
+      };
+    }
+    case ActionType.SetNumberOfHints: {
+      return {
+        ...state,
+        numberOfHints: state.numberOfHints - 1,
       };
     }
     case ActionType.ResetGame: {
