@@ -18,7 +18,7 @@ type ContextProps = {
 };
 
 const initialState: State = {
-  word: 'HELLO',
+  word: '',
   guesses: Array(5).fill(''),
   activeRow: 0,
   activePosition: 0,

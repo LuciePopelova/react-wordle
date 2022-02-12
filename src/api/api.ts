@@ -1,10 +1,12 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 export const fetchData = () => {
+  if(process.env.REACT_APP_RAPID_API_KEY) {
   const wordPromise = fetchWord();
   return {
     word: wrapPromise(wordPromise)
   }
+}
 }
 
 export const fetchWord = () =>{
@@ -22,8 +24,7 @@ export const fetchWord = () =>{
   .request(options)
   .then(response => response.data)
   .catch(error => console.error(error));
-
-}
+  }
 
 const wrapPromise = (promise: Promise<void>) => {
   let status = 'pending';

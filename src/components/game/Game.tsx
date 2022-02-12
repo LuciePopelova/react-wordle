@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { ActionType } from '../../actions/gameActions';
 import { fetchData } from '../../api/api';
+import { WORDS } from '../../constants/words';
 import { GameContext } from '../../contexts/GameContext';
 import Grid from '../grid/Grid';
 import Keyboard from '../keyboard/Keyboard';
@@ -27,8 +28,17 @@ const Game = () => {
     state: { activeRow, word, guesses, numberOfHints },
     dispatch,
   } = useContext(GameContext);
+  let newWord: Array<string> = [];
 
-  const newWord = resource.word.read();
+  if (process.env.REACT_APP_RAPID_API_KEY) {
+    newWord = resource.word.read();
+  }
+
+  useEffect(() => {
+    if (newWord.length === 0) {
+      newWord = [WORDS[Math.floor(Math.random() * WORDS.length)]];
+    }
+  }, []);
 
   useEffect(() => {
     if (isResetting) {
