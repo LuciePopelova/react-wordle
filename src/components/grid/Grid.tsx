@@ -10,7 +10,7 @@ const Grid = () => {
   return (
     <div>
       {guesses.map((guess, index) => (
-        <Row key={index} id={index} guess={guess} />
+        <Row key={index} rowId={index} guess={guess} />
       ))}
     </div>
   );

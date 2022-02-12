@@ -49,6 +49,7 @@ const Modal: React.FC<Props> = ({ isOpen, handleClose, children }) => {
           <animated.div style={animation}>
             <ModalWrapper isOpen={isOpen}>
               <CloseModalButton
+                data-cy="close-modal-button"
                 aria-label="Close modal"
                 onClick={handleClose}
               />

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-import { ActionType } from '../../actions/gameActions';
+import React, { useContext } from 'react';
 import { TileStatusType } from '../../constants/tileConstants';
 import { GameContext } from '../../contexts/GameContext';
 import Tile from '../tile/Tile';
@@ -14,15 +13,8 @@ type Props = {
 const HintModal: React.FC<Props> = ({ isOpen, handleClose }) => {
   const {
     state: { word, numberOfHints },
-    dispatch,
   } = useContext(GameContext);
   const generatedLetterId = Math.floor(Math.random() * 5);
-
-  useEffect(() => {
-    if (isOpen) {
-      dispatch({ type: ActionType.SetNumberOfHints });
-    }
-  }, [isOpen, dispatch]);
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose}>
@@ -30,6 +22,7 @@ const HintModal: React.FC<Props> = ({ isOpen, handleClose }) => {
       <p>What about you try this letter?</p>
       <TilesWrapper>
         <Tile
+          id={`tile-0`}
           key={generatedLetterId}
           value={word[generatedLetterId]}
           status={TileStatusType.TILE_STATUS_PRESENT}

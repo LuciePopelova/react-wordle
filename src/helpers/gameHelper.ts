@@ -7,11 +7,11 @@ export const getTileStatuses = (guessArray: Array<string>, word: string) => {
   const wordArray = updatingWord.split('');
 
     if (guess === wordArray[index]) {
-      updatingWord = updatingWord.replace(guess, '');
+      updatingWord = updatingWord.replace(guess, ' ');
       return TileStatusType.TILE_STATUS_CORRECT;
     }
     if (updatingWord.includes(guess)) {
-      updatingWord = updatingWord.replace(guess, '');
+      updatingWord = updatingWord.replace(guess, ' ');
       return TileStatusType.TILE_STATUS_PRESENT;
     }
 

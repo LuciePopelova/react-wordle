@@ -7,10 +7,10 @@ import { RowWrapper } from './RowStyles';
 
 type Props = {
   guess: string;
-  id: number;
+  rowId: number;
 };
 
-const Row: React.FC<Props> = ({ guess, id }) => {
+const Row: React.FC<Props> = ({ guess, rowId }) => {
   const {
     state: { activeRow, word },
   } = useContext(GameContext);
@@ -21,7 +21,7 @@ const Row: React.FC<Props> = ({ guess, id }) => {
     guessArray = new Array(5).fill('');
     guessArray.splice(0, guess.length, ...guess.split(''));
   }
-  if (guess.length === 5 && activeRow > id) {
+  if (guess.length === 5 && activeRow > rowId) {
     guessArray = guess.split('');
     statusArray = getTileStatuses(guessArray, word);
   }
@@ -29,7 +29,12 @@ const Row: React.FC<Props> = ({ guess, id }) => {
   return (
     <RowWrapper>
       {guessArray.map((letter, index) => (
-        <Tile key={index} value={letter} status={statusArray[index]} />
+        <Tile
+          id={`tile-${index}-${rowId}`}
+          key={index}
+          value={letter}
+          status={statusArray[index]}
+        />
       ))}
     </RowWrapper>
   );

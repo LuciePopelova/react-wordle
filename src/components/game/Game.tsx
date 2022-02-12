@@ -67,6 +67,11 @@ const Game = () => {
     }
   }, [newWord, dispatch]);
 
+  const handleHintModalClick = () => {
+    dispatch({ type: ActionType.SetNumberOfHints });
+    setIsHintModalOpen(true);
+  };
+
   return (
     <>
       <InfoModal
@@ -87,10 +92,16 @@ const Game = () => {
           <h1>Game</h1>
           <IconsWrapper>
             {numberOfHints > 0 && (
-              <HintIcon onClick={() => setIsHintModalOpen(true)} />
+              <HintIcon data-cy="hint-icon" onClick={handleHintModalClick} />
             )}
-            <RepeatIcon onClick={() => setIsResetting(true)} />
-            <InfoIcon onClick={() => setIsInfoModalOpen(true)} />
+            <RepeatIcon
+              data-cy="repeat-icon"
+              onClick={() => setIsResetting(true)}
+            />
+            <InfoIcon
+              data-cy="info-icon"
+              onClick={() => setIsInfoModalOpen(true)}
+            />
           </IconsWrapper>
         </ActionRow>
         <Grid />

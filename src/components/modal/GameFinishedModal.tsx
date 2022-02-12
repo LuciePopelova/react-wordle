@@ -31,6 +31,7 @@ const GameFinishedModal: React.FC<Props> = ({
       <TilesWrapper>
         {word.split('').map((letter, index) => (
           <Tile
+            id={`tile-${index}`}
             key={index}
             value={letter}
             status={TileStatusType.TILE_STATUS_CORRECT}

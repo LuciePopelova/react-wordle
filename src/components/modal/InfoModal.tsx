@@ -18,19 +18,59 @@ const InfoModal: React.FC<Props> = ({ isOpen, handleClose }) => {
         word.
       </p>
       <TilesWrapper>
-        <Tile value="H" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="E" status={TileStatusType.TILE_STATUS_CORRECT} />
-        <Tile value="L" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="L" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="O" status={TileStatusType.TILE_STATUS_EMPTY} />
+        <Tile
+          id={'tile-0'}
+          value="H"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-1'}
+          value="E"
+          status={TileStatusType.TILE_STATUS_CORRECT}
+        />
+        <Tile
+          id={'tile-2'}
+          value="L"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-3'}
+          value="L"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-4'}
+          value="O"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
       </TilesWrapper>
       <p>The letter E is in the word and in the correct place.</p>
       <TilesWrapper>
-        <Tile value="B" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="R" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="E" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="A" status={TileStatusType.TILE_STATUS_EMPTY} />
-        <Tile value="K" status={TileStatusType.TILE_STATUS_PRESENT} />
+        <Tile
+          id={'tile-5'}
+          value="B"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-6'}
+          value="R"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-7'}
+          value="E"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-8'}
+          value="A"
+          status={TileStatusType.TILE_STATUS_EMPTY}
+        />
+        <Tile
+          id={'tile-9'}
+          value="K"
+          status={TileStatusType.TILE_STATUS_PRESENT}
+        />
       </TilesWrapper>
       <p>The letter K is in the word but not in the correct place.</p>
     </Modal>
