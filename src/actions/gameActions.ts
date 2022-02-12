@@ -1,36 +1,21 @@
 export enum ActionType {
-  SetWord,
-  SetGameIsWon,
-  SaveRow,
-  UpdateLetter,
-  MoveForward,
   MoveBackward,
+  MoveForward,
   MoveToNextRow,
   ResetGame,
-  SetNumberOfHints
-}
-
-export interface SetWord {
-  type: ActionType.SetWord;
-  payload:  string;
-}
-
-export interface SetGameIsWon {
-  type: ActionType.SetGameIsWon;
-  payload:boolean;
-}
-
-export interface UpdateLetter {
-  type: ActionType.UpdateLetter;
-  payload:  string;
-}
-
-export interface MoveForward {
-  type: ActionType.MoveForward;
+  SetGameIsWon,
+  SetNumberOfHints,
+  SaveRow,
+  SetWord,
+  UpdateLetter
 }
 
 export interface MoveBackward {
   type: ActionType.MoveBackward;
+}
+
+export interface MoveForward {
+  type: ActionType.MoveForward;
 }
 
 export interface MoveToNextRow {
@@ -46,8 +31,23 @@ export interface SaveRow {
   payload: string;
 }
 
+export interface SetGameIsWon {
+  type: ActionType.SetGameIsWon;
+  payload:boolean;
+}
+
 export interface SetNumberOfHints {
   type: ActionType.SetNumberOfHints;
 }
 
-export type GameActions = SaveRow | SetGameIsWon | SetWord | UpdateLetter | SetNumberOfHints | MoveForward | ResetGame|  MoveBackward | MoveToNextRow;
+export interface SetWord {
+  type: ActionType.SetWord;
+  payload:  string;
+}
+
+export interface UpdateLetter {
+  type: ActionType.UpdateLetter;
+  payload:  string;
+}
+
+export type GameActions = MoveBackward | MoveForward | MoveToNextRow | ResetGame | SetGameIsWon | SetNumberOfHints | SaveRow | SetWord | UpdateLetter  ;

@@ -23,11 +23,11 @@ const Game = () => {
   const [isHintModalOpen, setIsHintModalOpen] = useState(false);
   const [isGameFinishedModalOpen, setIsGameFinishedModalOpen] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
-
   const {
     state: { activeRow, word, guesses, numberOfHints },
     dispatch,
   } = useContext(GameContext);
+
   const newWord = resource.word.read();
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const Game = () => {
   useEffect(() => {
     if (word !== '') {
       const isWon = guesses.some((guess) => guess === word);
+
       if (isWon) {
         dispatch({
           type: ActionType.SetGameIsWon,
@@ -58,7 +59,7 @@ const Game = () => {
         setIsGameFinishedModalOpen(true);
       }
     }
-  }, [activeRow]);
+  }, [activeRow, dispatch]);
 
   useEffect(() => {
     if (newWord.length) {

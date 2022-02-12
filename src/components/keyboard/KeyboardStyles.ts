@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import { TileStatusType } from "../../constants/tileConstants";
+import { handleItemColor } from "../../helpers/styleHelper";
+
+interface IKey {
+  status: TileStatusType
+}
 
 export const KeyboardWrapper = styled.div`
   margin-top: 3rem;
@@ -7,25 +12,9 @@ export const KeyboardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
-interface IKey {
-  status: TileStatusType
-}
-
-const handleKeyColor = (status: TileStatusType) => {
-  switch (status) {
-    case TileStatusType.TILE_STATUS_ABSENT:
-      return "#3a3a3c";
-    case TileStatusType.TILE_STATUS_CORRECT:
-      return "#538d4e";
-    case TileStatusType.TILE_STATUS_PRESENT:
-        return "#b59f3a";
-    default:
-      return "#121213";
-  }
-};
 
 export const Button = styled.button<IKey>`
-    background-color: ${(props) => handleKeyColor(props.status)};
+    background-color: ${(props) => handleItemColor(props.status)};
     cursor: pointer;
     width: 43px;
     height: 58px;

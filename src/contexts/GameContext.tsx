@@ -1,6 +1,8 @@
 import { createContext, Dispatch, Reducer, useReducer } from 'react';
 import { ActionType, GameActions } from '../actions/gameActions';
 
+type GameProviderProps = { children: React.ReactNode };
+
 type State = {
   word: string;
   guesses: Array<string>;
@@ -9,8 +11,6 @@ type State = {
   isGameWon: boolean;
   numberOfHints: number;
 };
-
-type GameProviderProps = { children: React.ReactNode };
 
 type ContextProps = {
   state: State;

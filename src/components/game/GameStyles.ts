@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { MdInfoOutline, MdReplay, MdHelp } from 'react-icons/md';
+import { MdHelp, MdInfoOutline, MdReplay } from 'react-icons/md';
+import styled, { css } from 'styled-components';
 
 export const GameWrapper = styled.div`
   padding-top: 8vh;
@@ -19,34 +19,34 @@ export const AboutButton = styled.button`
 `
 
 export const ActionRow = styled.div`
-width: 43vh;
-display:flex;
-margin-bottom: 0.2rem;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;`
+  width: 43vh;
+  display:flex;
+  margin-bottom: 0.2rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
 
 export const IconsWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `
 
+export const Icon = css`
+  margin-left: 0.5rem;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+`
+
 export const InfoIcon = styled(MdInfoOutline)`
-margin-left: 0.5rem;
-cursor: pointer;
-width: 1.5rem;
-height: 1.5rem;
+  ${Icon}
 `
 
 export const RepeatIcon = styled(MdReplay)`
-margin-left: 0.5rem;
-cursor: pointer;
-width: 1.5rem;
-height: 1.5rem;
+  ${Icon}
 `
 
-export const HintIcon = styled(MdHelp)`
-cursor: pointer;
-width: 1.5rem;
-height: 1.5rem;
+export const HintIcon = styled(MdHelp) `
+  ${Icon}
 `

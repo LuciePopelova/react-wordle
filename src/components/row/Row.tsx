@@ -11,8 +11,9 @@ type Props = {
 };
 
 const Row: React.FC<Props> = ({ guess, id }) => {
-  const { state } = useContext(GameContext);
-
+  const {
+    state: { activeRow, word },
+  } = useContext(GameContext);
   let guessArray = new Array(5).fill('');
   let statusArray = new Array(5).fill(TileStatusType.TILE_STATUS_EMPTY);
 
@@ -20,9 +21,9 @@ const Row: React.FC<Props> = ({ guess, id }) => {
     guessArray = new Array(5).fill('');
     guessArray.splice(0, guess.length, ...guess.split(''));
   }
-  if (guess.length === 5 && state.activeRow > id) {
+  if (guess.length === 5 && activeRow > id) {
     guessArray = guess.split('');
-    statusArray = getTileStatuses(guessArray, state.word);
+    statusArray = getTileStatuses(guessArray, word);
   }
 
   return (

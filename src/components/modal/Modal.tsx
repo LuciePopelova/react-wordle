@@ -22,12 +22,6 @@ const Modal: React.FC<Props> = ({ isOpen, handleClose, children }) => {
     transform: isOpen ? `translate(0%)` : `translateY(-100%)`,
   });
 
-  const closeModal = (event: any) => {
-    if (modalRef.current === event.target) {
-      handleClose();
-    }
-  };
-
   const keyPress = useCallback(
     (event) => {
       if (event.key === 'Escape' && isOpen) {
@@ -41,6 +35,12 @@ const Modal: React.FC<Props> = ({ isOpen, handleClose, children }) => {
     document.addEventListener('keydown', keyPress);
     return () => document.removeEventListener('keydown', keyPress);
   }, [keyPress]);
+
+  const closeModal = (event: any) => {
+    if (modalRef.current === event.target) {
+      handleClose();
+    }
+  };
 
   return (
     <>

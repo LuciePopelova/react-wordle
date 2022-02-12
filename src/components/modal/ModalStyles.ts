@@ -1,6 +1,10 @@
 import { MdClose } from 'react-icons/md';
 import styled from "styled-components";
 
+interface IModalOpen {
+  isOpen: boolean
+}
+
 export const Background = styled.div`
   width: 100%;
   height: 100%;
@@ -10,10 +14,6 @@ export const Background = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-interface IModalOpen {
-  isOpen: boolean
-}
 
 export const ModalWrapper = styled.div<IModalOpen>`
   width: 600px;

@@ -27,7 +27,6 @@ export const fetchWord = () =>{
 
 const wrapPromise = (promise: Promise<void>) => {
   let status = 'pending';
-
   let result: any;
   let suspender = promise.then(
     res => {
