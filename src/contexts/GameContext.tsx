@@ -69,7 +69,7 @@ const gameReducer: Reducer<State, GameActions> = (state, action) => {
     case ActionType.MoveToNextRow: {
       return {
         ...state,
-        activeRow: state.activeRow++,
+        activeRow: state.activeRow + 1,
         activePosition: 0,
       };
     }
