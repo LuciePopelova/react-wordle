@@ -35,17 +35,16 @@ const Game = () => {
   }
 
   useEffect(() => {
-    if (newWord.length === 0) {
-      newWord = [WORDS[Math.floor(Math.random() * WORDS.length)]];
-    }
-  }, []);
-
-  useEffect(() => {
     if (isResetting) {
       dispatch({ type: ActionType.ResetGame });
       setIsGameFinishedModalOpen(false);
       setIsResetting(false);
-      resource = fetchData();
+
+      if (process.env.REACT_APP_RAPID_API_KEY) {
+        resource = fetchData();
+      } else {
+        newWord = [WORDS[Math.floor(Math.random() * WORDS.length)]];
+      }
     }
   }, [isResetting, dispatch]);
 
