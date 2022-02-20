@@ -49,6 +49,12 @@ const Game = () => {
   }, [isResetting, dispatch]);
 
   useEffect(() => {
+    if (newWord.length === 0) {
+      newWord = [WORDS[Math.floor(Math.random() * WORDS.length)]];
+    }
+  }, []);
+
+  useEffect(() => {
     if (word !== '') {
       const isWon = guesses.some((guess) => guess === word);
 
